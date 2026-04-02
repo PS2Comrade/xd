@@ -1,2 +1,3 @@
-# xd
-Display Server for Unix-like OS
+# XD(Xylen-DisplayServer)
+
+The best display server you will ever use... and no options..
