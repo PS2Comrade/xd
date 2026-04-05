@@ -1,5 +1,5 @@
-#ifndef XD_PROTO_H
-#define XD_PROTO_H
+#ifndef XD_HEADER_H
+#define XD_HEADER_H
 #include <stdint.h>
 
 #define XD_MAGIC 0x58445331u
