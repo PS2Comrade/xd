@@ -1,0 +1,4 @@
+xd_server
+xd_demo
+*.o
+/tmp/
