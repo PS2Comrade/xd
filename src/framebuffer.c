@@ -4,16 +4,24 @@
 #include <stdlib.h>
 
 /* In-memory RGBA framebuffer: 800x600 */
-static xd_color_t fb[XD_HEIGHT][XD_WIDTH];
+static xd_color_t static_fb[XD_HEIGHT][XD_WIDTH];
+static xd_color_t *current_fb = (xd_color_t *)static_fb;
 
 void fb_init(void) {
     fb_clear();
 }
 
+void fb_set_buffer(xd_color_t *buffer) {
+    if (buffer == NULL)
+        current_fb = (xd_color_t *)static_fb;
+    else
+        current_fb = buffer;
+}
+
 void fb_set_pixel(int x, int y, xd_color_t color) {
     if (x < 0 || x >= XD_WIDTH || y < 0 || y >= XD_HEIGHT)
         return;
-    fb[y][x] = color;
+    current_fb[y * XD_WIDTH + x] = color;
 }
 
 void fb_draw_line(int x1, int y1, int x2, int y2, xd_color_t color) {
@@ -51,7 +59,7 @@ void fb_fill_rect(int x, int y, int w, int h, xd_color_t color) {
 }
 
 void fb_clear(void) {
-    memset(fb, 0, sizeof(fb));
+    memset(current_fb, 0, XD_WIDTH * XD_HEIGHT * sizeof(xd_color_t));
 }
 
 int fb_write_ppm(const char *path) {
@@ -66,9 +74,10 @@ int fb_write_ppm(const char *path) {
     int x, y;
     for (y = 0; y < XD_HEIGHT; y++) {
         for (x = 0; x < XD_WIDTH; x++) {
-            fputc(fb[y][x].r, f);
-            fputc(fb[y][x].g, f);
-            fputc(fb[y][x].b, f);
+            xd_color_t c = current_fb[y * XD_WIDTH + x];
+            fputc(c.r, f);
+            fputc(c.g, f);
+            fputc(c.b, f);
         }
     }
 

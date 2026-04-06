@@ -9,6 +9,9 @@ int xd_connect(void);
 /* Disconnect from the server */
 void xd_disconnect(void);
 
+/* Get the local pointer to the shared framebuffer */
+xd_color_t *xd_get_fb(void);
+
 /* Draw a single pixel */
 int xd_draw_pixel(uint16_t x, uint16_t y, xd_color_t color);
 

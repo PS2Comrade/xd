@@ -6,6 +6,9 @@
 /* Initialize the framebuffer (fills with black) */
 void fb_init(void);
 
+/* point the server's drawing eyes at a specific memory location */
+void fb_set_buffer(xd_color_t *buffer);
+
 /* Set a single pixel */
 void fb_set_pixel(int x, int y, xd_color_t color);
 
