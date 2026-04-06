@@ -3,28 +3,31 @@
 
 #include "../include/xd.h"
 
-/* Initialize the framebuffer (fills with black) */
+/* init and fill with black */
 void fb_init(void);
 
-/* point the server's drawing eyes at a specific memory location */
+/* point the server at a specific memory location */
 void fb_set_buffer(xd_color_t *buffer);
 
-/* Set a single pixel */
+/* see  if we are using a client shared buffer right now */
+int fb_is_client_buffer(void);
+
+/* set a single pixel */
 void fb_set_pixel(int x, int y, xd_color_t color);
 
-/* Draw a line using Bresenham's algorithm */
+/* bresenhams line */
 void fb_draw_line(int x1, int y1, int x2, int y2, xd_color_t color);
 
-/* Draw rectangle outline */
+/* rectangle outline */
 void fb_draw_rect(int x, int y, int w, int h, xd_color_t color);
 
-/* Fill a rectangle */
+/* filled rectangle */
 void fb_fill_rect(int x, int y, int w, int h, xd_color_t color);
 
-/* Clear the framebuffer to black */
+/* clear to black */
 void fb_clear(void);
 
-/* Write framebuffer contents to a PPM file */
+/* dump to ppm file */
 int fb_write_ppm(const char *path);
 
 #endif /* FRAMEBUFFER_H */

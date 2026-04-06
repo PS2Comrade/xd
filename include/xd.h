@@ -11,32 +11,31 @@
 #define XD_HEIGHT 600
 
 /* Command types */
-#define XD_CMD_FLUSH      0x05
-#define XD_CMD_CLEAR      0x06
+#define XD_CMD_FLUSH 0x05
+#define XD_CMD_CLEAR 0x06
 #define XD_CMD_NEW_BUFFER 0x07
 
-/* RGBA color */
+/* rgba color alpha is ignored by ppm but we keep it anyway */
 typedef struct {
-    uint8_t r, g, b, a;
+	uint8_t r, g, b, a;
 } xd_color_t;
 
-/* Fixed-size command structs - sent over socket as raw bytes */
+/* fixed-size command structs - sent over socket as raw bytes */
 
 typedef struct {
-    uint8_t type;       /* XD_CMD_NEW_BUFFER */
-    uint32_t size;      /* total bytes (width * height * 4) */
+	uint8_t type;  /* XD_CMD_NEW_BUFFER */
+	uint32_t size; /* total bytes (width * height * 4) */
 } __attribute__((packed)) xd_cmd_new_buffer_t;
 
 typedef struct {
-    uint8_t type;       /* XD_CMD_FLUSH */
+	uint8_t type; /* XD_CMD_FLUSH */
 } __attribute__((packed)) xd_cmd_flush_t;
 
 typedef struct {
-    uint8_t type;       /* XD_CMD_CLEAR */
+	uint8_t type; /* XD_CMD_CLEAR */
 } __attribute__((packed)) xd_cmd_clear_t;
 
-
-/* Helper macros for colors */
+/* helper macros for colors */
 #define XD_COLOR(r, g, b) ((xd_color_t){(r), (g), (b), 255})
 #define XD_RGBA(r, g, b, a) ((xd_color_t){(r), (g), (b), (a)})
 
