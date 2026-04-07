@@ -1,4 +1,13 @@
+# Binaries
 xd_server
 xd_demo
+
+# Object files
 *.o
-/tmp/
+
+# Meson build directory
+build/
+
+# Temporary files
+/tmp/xd_frame_*.ppm
+/tmp/xd.sock
